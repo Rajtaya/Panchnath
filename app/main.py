@@ -11,13 +11,24 @@ app = FastAPI(title="Panchnad Shodh Sansthan")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
+SEED_VERSION = 2  # bump this to force re-seed on next deploy
+
 @app.on_event("startup")
 def on_startup():
+    import os
+    from .database import DB_PATH
+    # Force re-seed if version changed (delete old DB)
+    version_file = DB_PATH.parent / ".seed_version"
+    current = int(version_file.read_text().strip()) if version_file.exists() else 0
+    if current < SEED_VERSION and DB_PATH.exists():
+        os.remove(DB_PATH)
+        version_file.write_text(str(SEED_VERSION))
     init_db()
-    # Auto-seed if DB is empty (first deploy)
     with Session(engine) as s:
         if not s.exec(select(AdminUser)).first():
             _seed(s)
+            # Write version after successful seed
+            version_file.write_text(str(SEED_VERSION))
 
 
 def _seed(s: Session):
