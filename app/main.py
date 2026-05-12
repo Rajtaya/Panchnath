@@ -11,7 +11,7 @@ app = FastAPI(title="Panchnad Shodh Sansthan")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
-SEED_VERSION = 2  # bump this to force re-seed on next deploy
+SEED_VERSION = 3  # bump this to force re-seed on next deploy
 
 @app.on_event("startup")
 def on_startup():
