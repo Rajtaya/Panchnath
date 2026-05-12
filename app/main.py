@@ -17,18 +17,20 @@ SEED_VERSION = 2  # bump this to force re-seed on next deploy
 def on_startup():
     import os
     from .database import DB_PATH
-    # Force re-seed if version changed (delete old DB)
+    # Force re-seed if version changed (delete old DB and recreate engine)
     version_file = DB_PATH.parent / ".seed_version"
     current = int(version_file.read_text().strip()) if version_file.exists() else 0
-    if current < SEED_VERSION and DB_PATH.exists():
-        os.remove(DB_PATH)
+    if current < SEED_VERSION:
+        if DB_PATH.exists():
+            engine.dispose()
+            os.remove(DB_PATH)
+            print(f"[SEED] Deleted old DB at {DB_PATH}, re-seeding v{SEED_VERSION}")
         version_file.write_text(str(SEED_VERSION))
     init_db()
     with Session(engine) as s:
         if not s.exec(select(AdminUser)).first():
             _seed(s)
-            # Write version after successful seed
-            version_file.write_text(str(SEED_VERSION))
+            print(f"[SEED] Database seeded successfully (v{SEED_VERSION})")
 
 
 def _seed(s: Session):
