@@ -1,0 +1,60 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<h1 class="text-2xl font-bold text-slate-800 mb-8">Dashboard</h1>
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+  {% for label, count, href, color in [
+    ("Posts", stats.posts, "/admin/posts", "blue"),
+    ("Publications", stats.publications, "/admin/publications", "purple"),
+    ("Study Centres", stats.centres, "/admin/centres", "emerald"),
+    ("Annual Lectures", stats.lectures, "/admin/lectures", "amber"),
+    ("People", stats.people, "/admin/people", "slate"),
+    ("Gallery", stats.gallery, "/admin/gallery", "indigo"),
+    ("Inquiries", stats.inquiries, "/admin/inquiries", "rose"),
+  ] %}
+  <a href="{{ href }}" class="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition">
+    <div class="text-3xl font-bold text-{{ color }}-600">{{ count }}</div>
+    <div class="text-sm text-slate-500 mt-1">{{ label }}</div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="grid lg:grid-cols-2 gap-8">
+  <div>
+    <h2 class="text-lg font-bold text-slate-800 mb-4">Recent Posts</h2>
+    <div class="bg-white rounded-xl border border-gray-200 divide-y">
+      {% for p in recent_posts %}
+      <div class="p-4 flex items-center justify-between">
+        <div class="min-w-0">
+          <div class="font-medium text-sm truncate">{{ p.title }}</div>
+          <div class="text-xs text-slate-400 mt-0.5">{{ p.posted_on }} &middot; {{ p.tag or "Update" }}</div>
+        </div>
+        <a href="/admin/posts/{{ p.id }}/edit" class="text-xs text-blue-600 hover:underline shrink-0 ml-3">Edit</a>
+      </div>
+      {% else %}
+      <div class="p-4 text-sm text-slate-400">No posts yet.</div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-lg font-bold text-slate-800 mb-4">Recent Inquiries</h2>
+    <div class="bg-white rounded-xl border border-gray-200 divide-y">
+      {% for q in recent_inquiries %}
+      <div class="p-4">
+        <div class="flex items-center justify-between">
+          <div class="font-medium text-sm">{{ q.name }}</div>
+          <div class="text-xs text-slate-400">{{ q.submitted_on }}</div>
+        </div>
+        <div class="text-xs text-slate-500 mt-0.5">{{ q.subject }}</div>
+      </div>
+      {% else %}
+      <div class="p-4 text-sm text-slate-400">No inquiries yet.</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

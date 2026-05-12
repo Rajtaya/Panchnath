@@ -1,0 +1,19 @@
+<div class="space-y-5">
+  {% for p in posts %}
+  <article class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 card-hover">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-[11px] font-semibold uppercase tracking-widest text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">{{ p.tag or "Update" }}</span>
+      <span class="text-xs text-stone-400">{{ p.posted_on }}</span>
+    </div>
+    <h3 class="font-bold text-xl leading-snug mb-2">{{ p.title }}</h3>
+    <div class="text-stone-600 leading-relaxed whitespace-pre-line">{{ p.body }}</div>
+    {% if p.link %}
+    <a class="inline-flex items-center gap-1 text-amber-700 text-sm mt-3 font-medium hover:underline" href="{{ p.link }}" target="_blank">
+      Open link <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+    {% endif %}
+  </article>
+  {% else %}
+  <div class="text-center py-12 text-stone-400">No posts found.</div>
+  {% endfor %}
+</div>

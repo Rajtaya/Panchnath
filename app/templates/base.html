@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Panchnad Shodh Sansthan{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            hindi: ['"Noto Serif Devanagari"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col antialiased">
+
+  <header class="bg-stone-900 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="font-hindi text-xl font-bold text-amber-400 hover:text-amber-300 transition">
+          &#x092A;&#x0902;&#x091A;&#x0928;&#x0926; &#x0936;&#x094B;&#x0927; &#x0938;&#x0902;&#x0938;&#x094D;&#x0925;&#x093E;&#x0928;
+        </a>
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="/" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Home</span><span class="lang-hi">मुख्य पृष्ठ</span>
+          </a>
+          <a href="/about" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">About</span><span class="lang-hi">परिचय</span>
+          </a>
+          <a href="/posts" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Posts</span><span class="lang-hi">गतिविधियाँ</span>
+          </a>
+          <a href="/centres" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Centres</span><span class="lang-hi">केंद्र</span>
+          </a>
+          <a href="/publications" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Publications</span><span class="lang-hi">प्रकाशन</span>
+          </a>
+          <a href="/lectures" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Lectures</span><span class="lang-hi">व्याख्यान</span>
+          </a>
+          <a href="/gallery" class="px-3 py-2 text-sm font-medium rounded-md hover:bg-stone-800 transition">
+            <span class="lang-en">Gallery</span><span class="lang-hi">गैलरी</span>
+          </a>
+          <a href="/contact" class="ml-2 px-4 py-2 text-sm font-medium bg-amber-600 rounded-md hover:bg-amber-500 transition">
+            <span class="lang-en">Contact</span><span class="lang-hi">संपर्क</span>
+          </a>
+          <button onclick="toggleLang()" class="lang-toggle ml-3 flex items-center gap-2 px-2 py-1.5 rounded-lg" title="Switch language">
+            <div class="lang-toggle-track">
+              <div class="lang-toggle-thumb"><span class="lang-en">EN</span><span class="lang-hi">हि</span></div>
+            </div>
+          </button>
+        </nav>
+        <div class="md:hidden flex items-center gap-2">
+          <button onclick="toggleLang()" class="lang-toggle flex items-center gap-2 px-2 py-1.5 rounded-lg" title="Switch language">
+            <div class="lang-toggle-track">
+              <div class="lang-toggle-thumb"><span class="lang-en">EN</span><span class="lang-hi">हि</span></div>
+            </div>
+          </button>
+          <button onclick="document.getElementById('mob-nav').classList.toggle('hidden')" class="p-2 rounded hover:bg-stone-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="mob-nav" class="hidden md:hidden pb-4 space-y-1">
+        <a href="/" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Home</span><span class="lang-hi">मुख्य पृष्ठ</span></a>
+        <a href="/about" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">About</span><span class="lang-hi">परिचय</span></a>
+        <a href="/posts" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Posts</span><span class="lang-hi">गतिविधियाँ</span></a>
+        <a href="/centres" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Centres</span><span class="lang-hi">केंद्र</span></a>
+        <a href="/publications" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Publications</span><span class="lang-hi">प्रकाशन</span></a>
+        <a href="/lectures" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Lectures</span><span class="lang-hi">व्याख्यान</span></a>
+        <a href="/gallery" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Gallery</span><span class="lang-hi">गैलरी</span></a>
+        <a href="/contact" class="block px-3 py-2 text-sm rounded hover:bg-stone-800"><span class="lang-en">Contact</span><span class="lang-hi">संपर्क</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1">{% block content %}{% endblock %}</main>
+
+  <footer class="bg-stone-900 text-stone-400">
+    <div class="max-w-7xl mx-auto px-6 py-14">
+      <div class="grid md:grid-cols-3 gap-10">
+        <div>
+          <h3 class="font-hindi text-lg text-amber-400 font-bold mb-3">&#x092A;&#x0902;&#x091A;&#x0928;&#x0926; &#x0936;&#x094B;&#x0927; &#x0938;&#x0902;&#x0938;&#x094D;&#x0925;&#x093E;&#x0928;</h3>
+          <p class="text-sm leading-relaxed">
+            <span class="lang-en">Established 1984. A leading research forum in Northwest India for free exchange of views on culture, history, and national life.</span>
+            <span class="lang-hi">स्थापना 1984। उत्तर-पश्चिम भारत में संस्कृति, इतिहास और राष्ट्रीय जीवन पर विचारों के स्वतंत्र आदान-प्रदान हेतु एक अग्रणी शोध मंच।</span>
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+            <span class="lang-en">Quick Links</span><span class="lang-hi">त्वरित लिंक</span>
+          </h4>
+          <div class="space-y-2 text-sm">
+            <a href="/about" class="block hover:text-amber-400 transition"><span class="lang-en">About Us</span><span class="lang-hi">हमारे बारे में</span></a>
+            <a href="/posts" class="block hover:text-amber-400 transition"><span class="lang-en">Posts &amp; Activities</span><span class="lang-hi">गतिविधियाँ</span></a>
+            <a href="/publications" class="block hover:text-amber-400 transition"><span class="lang-en">Publications</span><span class="lang-hi">प्रकाशन</span></a>
+            <a href="/lectures" class="block hover:text-amber-400 transition"><span class="lang-en">Annual Lectures</span><span class="lang-hi">वार्षिक व्याख्यान</span></a>
+            <a href="/centres" class="block hover:text-amber-400 transition"><span class="lang-en">Study Centres</span><span class="lang-hi">अध्ययन केंद्र</span></a>
+            <a href="/gallery" class="block hover:text-amber-400 transition"><span class="lang-en">Photo Gallery</span><span class="lang-hi">फोटो गैलरी</span></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+            <span class="lang-en">Contact</span><span class="lang-hi">संपर्क</span>
+          </h4>
+          <div class="space-y-2 text-sm">
+            <p><span class="lang-en">Karuna Sadan, Sector 11-B, Chandigarh</span><span class="lang-hi">करुणा सदन, सेक्टर 11-बी, चंडीगढ़</span></p>
+            <a href="mailto:panchnadri@gmail.com" class="block hover:text-amber-400 transition">panchnadri@gmail.com</a>
+            <a href="https://panchnad.org" target="_blank" class="block hover:text-amber-400 transition">panchnad.org</a>
+            <a href="https://facebook.com/panchnad.org" target="_blank" class="block hover:text-amber-400 transition">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-stone-800 mt-10 pt-6 flex flex-wrap justify-between items-center text-xs">
+        <p>&copy; 2025 <span class="lang-en">Panchnad Shodh Sansthan. All rights reserved.</span><span class="lang-hi">पंचनद शोध संस्थान। सर्वाधिकार सुरक्षित।</span></p>
+        <a href="/admin/login" class="hover:text-amber-400 transition">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-hi');
+      localStorage.setItem('panchnad-lang', document.body.classList.contains('lang-hi') ? 'hi' : 'en');
+    }
+    if (localStorage.getItem('panchnad-lang') === 'hi') {
+      document.body.classList.add('lang-hi');
+    }
+  </script>
+</body>
+</html>

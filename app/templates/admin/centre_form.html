@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ "Edit Centre" if centre else "New Centre" }}{% endblock %}
+{% block content %}
+
+<div class="max-w-2xl">
+  <h1 class="text-2xl font-bold text-slate-800 mb-6">{{ "Edit Centre" if centre else "New Centre" }}</h1>
+
+  <form method="post" action="{{ '/admin/centres/' ~ centre.id ~ '/edit' if centre else '/admin/centres/new' }}" class="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+    <div>
+      <label class="block text-sm font-medium text-slate-700 mb-1.5">Name</label>
+      <input type="text" name="name" value="{{ centre.name if centre else '' }}" required
+             class="w-full p-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-slate-700 mb-1.5">Location</label>
+      <input type="text" name="location" value="{{ centre.location if centre else '' }}" required
+             class="w-full p-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="flex items-center gap-3 pt-2">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-lg font-medium transition">{{ "Update" if centre else "Create" }}</button>
+      <a href="/admin/centres" class="text-slate-500 hover:text-slate-700 text-sm">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

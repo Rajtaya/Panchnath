@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Publications &mdash; Panchnad Shodh Sansthan{% endblock %}
+{% block content %}
+
+<section class="bg-stone-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <h1 class="text-4xl font-extrabold mb-3">Publications</h1>
+    <p class="text-stone-400 text-lg">Books, journals, and research reports</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="space-y-6">
+      {% for pub in publications %}
+      <article class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 card-hover">
+        <div class="flex items-start gap-5">
+          <div class="w-16 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-xl flex items-center justify-center text-amber-700 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div class="flex-1">
+            <span class="text-xs font-semibold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">{{ pub.year }}</span>
+            <h3 class="font-bold text-xl mt-2">{{ pub.title }}</h3>
+            {% if pub.author_or_editor %}
+            <div class="text-sm text-amber-700 font-medium mt-1">{{ pub.author_or_editor }}</div>
+            {% endif %}
+            <p class="text-stone-600 mt-2 leading-relaxed">{{ pub.description }}</p>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

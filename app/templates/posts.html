@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Posts &mdash; Panchnad Shodh Sansthan{% endblock %}
+{% block content %}
+
+<section class="bg-stone-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <h1 class="text-4xl font-extrabold mb-3">Posts &amp; Activities</h1>
+    <p class="text-stone-400 text-lg">Seminars, events, lectures, and updates</p>
+  </div>
+</section>
+
+<section class="py-12">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="mb-8">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search posts..."
+             class="w-full p-4 rounded-xl border border-stone-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-stone-800 placeholder:text-stone-400"
+             hx-get="/posts" hx-trigger="keyup changed delay:300ms"
+             hx-target="#post-list" hx-include="this">
+    </div>
+    <div id="post-list">
+      {% include "_posts_list.html" %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

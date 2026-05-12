@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Study Centres &mdash; Panchnad Shodh Sansthan{% endblock %}
+{% block content %}
+
+<section class="bg-stone-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <h1 class="text-4xl font-extrabold mb-3">Study Centres</h1>
+    <p class="text-stone-400 text-lg">Adhyayan Kendras across Northwest India</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="max-w-5xl mx-auto px-6">
+    <p class="text-stone-600 text-lg mb-10 max-w-3xl">
+      Panchnad Shodh Sansthan operates study centres attached to universities, facilitating research,
+      seminars, and academic discourse across the region.
+    </p>
+    <div class="grid sm:grid-cols-2 gap-6">
+      {% for c in centres %}
+      <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 card-hover">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-700 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <div>
+            <div class="font-bold text-lg">{{ c.name }}</div>
+            <div class="text-stone-500 mt-1">{{ c.location }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

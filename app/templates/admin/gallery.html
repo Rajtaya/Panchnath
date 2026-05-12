@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block title %}Gallery{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-slate-800">Photo Gallery</h1>
+  <a href="/admin/gallery/new" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition">+ Add Photo</a>
+</div>
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+  {% for img in images %}
+  <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <img src="/static/gallery/{{ img.image_filename }}" alt="{{ img.title }}" class="w-full h-48 object-cover">
+    <div class="p-4">
+      <div class="font-medium text-sm mb-1">{{ img.title }}</div>
+      <div class="text-xs text-slate-400 mb-2">{{ img.event_date }} {% if img.centre %}&middot; {{ img.centre }}{% endif %}</div>
+      <div class="flex gap-2">
+        <a href="/admin/gallery/{{ img.id }}/edit" class="text-blue-600 hover:underline text-xs">Edit</a>
+        <form method="post" action="/admin/gallery/{{ img.id }}/delete" class="inline" onsubmit="return confirm('Delete this photo?')">
+          <button type="submit" class="text-red-500 hover:underline text-xs">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="col-span-full text-center py-12 text-slate-400 bg-white rounded-xl border border-gray-200">
+    No photos yet. Click "+ Add Photo" to upload.
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

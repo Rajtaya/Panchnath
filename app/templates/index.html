@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Panchnad Shodh Sansthan &mdash; Est. 1984{% endblock %}
+{% block content %}
+
+<section class="bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 text-white py-24">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="bg-amber-500/20 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">
+        <span class="lang-en">Est. 1984</span><span class="lang-hi">स्थापना 1984</span>
+      </span>
+      <span class="bg-white/10 text-stone-300 text-xs font-semibold px-3 py-1 rounded-full">
+        <span class="lang-en">Chandigarh, India</span><span class="lang-hi">चंडीगढ़, भारत</span>
+      </span>
+    </div>
+    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+      <span class="lang-en">Panchnad Shodh<br>Sansthan</span>
+      <span class="lang-hi font-hindi">पंचनद शोध<br>संस्थान</span>
+    </h1>
+    <p class="text-xl text-stone-300 max-w-2xl leading-relaxed mb-3">
+      <span class="lang-en">An honest and tireless pursuit of truth in all its manifestations and all fields of social and national life.</span>
+      <span class="lang-hi font-hindi text-lg">सत्य की समस्त अभिव्यक्तियों तथा सामाजिक एवं राष्ट्रीय जीवन के सभी क्षेत्रों में एक ईमानदार और अथक अन्वेषण।</span>
+    </p>
+    <p class="text-amber-300/80 italic text-lg max-w-2xl mb-8">
+      <span class="lang-en">"Aa no bhadra kratavo yantu vishvatah" &mdash; Let noble thoughts come to us from all sides</span>
+      <span class="lang-hi font-hindi">"आ नो भद्राः क्रतवो यन्तु विश्वतः" &mdash; सब दिशाओं से हमें शुभ विचार प्राप्त हों</span>
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/about" class="bg-amber-600 hover:bg-amber-500 text-white px-6 py-3 rounded-lg font-medium transition">
+        <span class="lang-en">Learn More</span><span class="lang-hi">और जानें</span>
+      </a>
+      <a href="/lectures" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6 py-3 rounded-lg font-medium transition">
+        <span class="lang-en">Annual Lectures</span><span class="lang-hi">वार्षिक व्याख्यान</span>
+      </a>
+      <a href="/publications" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6 py-3 rounded-lg font-medium transition">
+        <span class="lang-en">Publications</span><span class="lang-hi">प्रकाशन</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid sm:grid-cols-4 gap-6 text-center">
+      <div class="p-6">
+        <div class="text-4xl font-extrabold gradient-text">1984</div>
+        <div class="text-sm text-stone-500 mt-2 font-medium">
+          <span class="lang-en">Founded</span><span class="lang-hi">स्थापना</span>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="text-4xl font-extrabold gradient-text">{{ lectures_count }}+</div>
+        <div class="text-sm text-stone-500 mt-2 font-medium">
+          <span class="lang-en">Annual Lectures</span><span class="lang-hi">वार्षिक व्याख्यान</span>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="text-4xl font-extrabold gradient-text">{{ centres_count }}</div>
+        <div class="text-sm text-stone-500 mt-2 font-medium">
+          <span class="lang-en">Study Centres</span><span class="lang-hi">अध्ययन केंद्र</span>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="text-4xl font-extrabold gradient-text">6</div>
+        <div class="text-sm text-stone-500 mt-2 font-medium">
+          <span class="lang-en">States &amp; UTs</span><span class="lang-hi">राज्य व केंद्र शासित</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-2">
+        <span class="lang-en">Recent Posts &amp; Activities</span>
+        <span class="lang-hi font-hindi">हालिया गतिविधियाँ</span>
+      </h2>
+      <div class="section-bar"></div>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for p in posts %}
+      <article class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 card-hover">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-[11px] font-semibold uppercase tracking-widest text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">{{ p.tag or "Update" }}</span>
+          <span class="text-xs text-stone-400">{{ p.posted_on }}</span>
+        </div>
+        <h3 class="font-bold text-lg leading-snug mb-2">{{ p.title }}</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">{{ p.body[:160] }}{% if p.body|length > 160 %}...{% endif %}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="mt-8 text-center">
+      <a href="/posts" class="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-semibold transition">
+        <span class="lang-en">View all posts</span><span class="lang-hi">सभी पोस्ट देखें</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

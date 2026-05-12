@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% block title %}Annual Lectures{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-slate-800">Annual Lectures</h1>
+  <a href="/admin/lectures/new" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition">+ Add Lecture</a>
+</div>
+
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 border-b text-left">
+      <tr>
+        <th class="px-5 py-3 font-semibold text-slate-600 w-20">Year</th>
+        <th class="px-5 py-3 font-semibold text-slate-600">Speaker</th>
+        <th class="px-5 py-3 font-semibold text-slate-600">Topic</th>
+        <th class="px-5 py-3 font-semibold text-slate-600 w-28 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y">
+      {% for lec in lectures %}
+      <tr class="hover:bg-gray-50 transition">
+        <td class="px-5 py-3 font-medium">{{ lec.year }}</td>
+        <td class="px-5 py-3">{{ lec.speaker }}</td>
+        <td class="px-5 py-3 text-slate-500">{{ lec.topic or "—" }}</td>
+        <td class="px-5 py-3 text-right space-x-2">
+          <a href="/admin/lectures/{{ lec.id }}/edit" class="text-blue-600 hover:underline">Edit</a>
+          <form method="post" action="/admin/lectures/{{ lec.id }}/delete" class="inline" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="text-red-500 hover:underline">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="px-5 py-8 text-center text-slate-400">No lectures yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

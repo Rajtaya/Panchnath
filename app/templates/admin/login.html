@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login &mdash; Panchnad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{font-family:'Inter',system-ui,sans-serif}</style>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center antialiased">
+  <div class="w-full max-w-sm mx-4">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-white mb-1">Panchnad Admin</h1>
+      <p class="text-slate-400 text-sm">Sign in to manage content</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      {% if error %}
+      <div class="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+        Invalid username or password.
+      </div>
+      {% endif %}
+      <form method="post" action="/admin/login" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Username</label>
+          <input type="text" name="username" required autofocus
+                 class="w-full p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
+          <input type="password" name="password" required
+                 class="w-full p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent">
+        </div>
+        <button type="submit" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl font-semibold transition">
+          Sign In
+        </button>
+      </form>
+    </div>
+    <p class="text-center mt-6 text-slate-500 text-sm">
+      <a href="/" class="hover:text-slate-300 transition">&larr; Back to website</a>
+    </p>
+  </div>
+</body>
+</html>

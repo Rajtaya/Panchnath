@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}About &mdash; Panchnad Shodh Sansthan{% endblock %}
+{% block content %}
+
+<section class="bg-stone-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <h1 class="text-4xl font-extrabold mb-3">About Us</h1>
+    <p class="text-stone-400 text-lg">Established 1984 &middot; Chandigarh</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-6 fade-in">
+    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-8 mb-10">
+      <p class="text-stone-700 text-lg leading-relaxed mb-5">
+        <strong>Panchnad Shodh Sansthan</strong> (Panchnad Research Institute) was established in <strong>1984</strong> with
+        <strong>Justice T. U. Mehta</strong>, former Chief Justice of Himachal Pradesh High Court, as its first Chairman.
+        It is a leading forum in the Northwest comprising Punjab, Haryana, Himachal Pradesh, Jammu, Chandigarh and Delhi
+        for free exchange of views.
+      </p>
+      <p class="text-stone-600 leading-relaxed">
+        An honest and tireless pursuit of truth in all its manifestations and all fields of social and national life
+        has been the most valued cultural tradition of Bharat. The institute continues this tradition through research,
+        seminars, field studies, interfaith dialogues, and publications.
+      </p>
+    </div>
+
+    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100 mb-10">
+      <h3 class="text-xl font-bold text-amber-900 mb-4">Guiding Philosophy</h3>
+      <div class="space-y-4">
+        <div>
+          <p class="text-stone-800 italic text-lg font-hindi">"&#x0906; &#x0928;&#x094B; &#x092D;&#x0926;&#x094D;&#x0930;&#x093E;&#x0903; &#x0915;&#x094D;&#x0930;&#x0924;&#x0935;&#x094B; &#x092F;&#x0928;&#x094D;&#x0924;&#x0941; &#x0935;&#x093F;&#x0936;&#x094D;&#x0935;&#x0924;&#x0903;"</p>
+          <p class="text-stone-500 text-sm mt-1">Let noble thoughts come to us from all sides</p>
+        </div>
+        <div>
+          <p class="text-stone-800 italic text-lg font-hindi">"&#x090F;&#x0915;&#x0902; &#x0938;&#x0926;&#x094D;&#x0935;&#x093F;&#x092A;&#x094D;&#x0930;&#x093E; &#x092C;&#x0939;&#x0941;&#x0927;&#x093E; &#x0935;&#x0926;&#x0928;&#x094D;&#x0924;&#x093F;"</p>
+          <p class="text-stone-500 text-sm mt-1">Truth is one; the wise express it in many ways</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <h3 class="text-2xl font-bold mb-2">Core Activities</h3>
+      <div class="section-bar mb-6"></div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {% for activity in [
+          "Debate and research on contemporary and foundational issues",
+          "Field studies and investigative research",
+          "Interfaith and inter-community dialogues for conflict resolution",
+          "Journalist training camps and media ethics education",
+          "Annual Panchnad Lectures since 1987",
+          "Research journal and book publications"
+        ] %}
+        <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-stone-100">
+          <div class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></div>
+          <span class="text-stone-700">{{ activity }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <h3 class="text-2xl font-bold mb-2">Notable Projects</h3>
+      <div class="section-bar mb-6"></div>
+      <div class="space-y-4">
+        {% for year, desc in [("1984", "Field study on anti-Sikh riots — published as “Facts Speak for Themselves”"), ("1986", "Punjab Crisis dialogue with prominent scholars"), ("1990s", "Pakistani infiltration research in Rajasthan border areas"), ("1999", "Gujarat Dangs district investigation")] %}
+        <div class="flex items-start gap-4 bg-white rounded-xl p-4 border border-stone-100">
+          <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full shrink-0">{{ year }}</span>
+          <span class="text-stone-700">{{ desc }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <h3 class="text-2xl font-bold mb-2">Leadership</h3>
+    <div class="section-bar mb-6"></div>
+    <div class="grid sm:grid-cols-2 gap-6">
+      {% for person in people %}
+      <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 card-hover">
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-700 rounded-full flex items-center justify-center text-white font-bold text-xl shrink-0">
+            {{ person.name[0] }}
+          </div>
+          <div>
+            <div class="font-bold text-lg">{{ person.name }}</div>
+            <div class="text-sm text-amber-700 font-medium">{{ person.role }}</div>
+            {% if person.bio %}
+            <p class="text-sm text-stone-500 mt-2 leading-relaxed">{{ person.bio }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

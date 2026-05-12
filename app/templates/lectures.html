@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Annual Lectures &mdash; Panchnad Shodh Sansthan{% endblock %}
+{% block content %}
+
+<section class="bg-stone-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <h1 class="text-4xl font-extrabold mb-3">Annual Panchnad Lectures</h1>
+    <p class="text-stone-400 text-lg">Distinguished lecture series since 1987</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="max-w-3xl mx-auto px-6">
+    <p class="text-stone-600 text-lg mb-12">
+      Since 1987, Panchnad Shodh Sansthan has hosted distinguished annual lectures featuring
+      eminent speakers on topics ranging from constitutional law to national security and cultural issues.
+    </p>
+
+    <div class="relative">
+      <div class="absolute left-[18px] top-0 bottom-0 w-[2px] bg-amber-200"></div>
+      <div class="space-y-8">
+        {% for lec in lectures %}
+        <div class="relative flex items-start gap-6 pl-12">
+          <div class="absolute left-[12px] top-2 timeline-dot"></div>
+          <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-5 flex-1 card-hover">
+            <span class="text-xs font-bold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">{{ lec.year }}</span>
+            <h3 class="font-bold text-lg mt-2">{{ lec.speaker }}</h3>
+            {% if lec.topic %}
+            <p class="text-stone-500 mt-1">{{ lec.topic }}</p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
