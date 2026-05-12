@@ -79,13 +79,41 @@ def _seed(s: Session):
         s.add(Post(title=title, body=body, posted_on=d, tag=tag))
 
     pubs = [
-        ("Vichar Pravah", "Collection of thought essays. Released at 31st Annual Lecture.", 2025),
-        ("Human Values and Rights in Quran", "Study on human values as expressed in the Quran.", 2025),
-        ("Bharat 2047 — A Collective Vision", "Collective vision of 20 experts on culture, technology, economics.", 2022),
-        ("Facts Speak for Themselves", "Field study report on 1984 anti-Sikh riots.", 1985),
+        ("Vichar Pravah (विचार प्रवाह)",
+         "Collection of thought essays published by Panchnad Shodh Sansthan. Released by Punjab Governor Gulab Chand Kataria at the 31st Annual Panchnad Lecture in Chandigarh.",
+         2025, "Panchnad Shodh Sansthan"),
+        ("Human Values and Rights in Quran",
+         "A study on human values and rights as expressed in the Quran. Released at the 31st Annual Panchnad Lecture by Punjab Governor.",
+         2025, "Panchnad Shodh Sansthan"),
+        ("Bharat 2047 — A Collective Vision",
+         "Edited by Prof. B. K. Kuthiala, co-published by Prabhat Prakashan, New Delhi. Presents a comprehensive dialogue about the future of India at 100 years of independence. "
+         "The English edition (ISBN 9789355620330, 352 pp.) carries the collective vision of 20 experts covering rural life, global threats, dharma, sanskriti, technology, economics, finance and defence. "
+         "Hindi edition published 4 March 2022 (232 pp.). Available on Flipkart, Amazon.in and leading bookstores.",
+         2022, "Prof. Brij Kishore Kuthiala (Editor)"),
+        ("Hindu Nationalism — A Contemporary Perspective",
+         "Built around Mohan Bhagwat's 2008 Panchnad Lecture. Introduction by Dr. Murli Manohar Joshi making a case for the revival of sanskriti as the basis for re-emergence of Indian society. "
+         "Explores the quality of intellectual debate in post-independence India.",
+         2008, "Shyam Khosla & B. K. Kuthiala (Editors)"),
+        ("The Dangs (Gujarat) — Field Study Report",
+         "A detailed field study into Christians-Vanvasi clashes in Dangs district of Gujarat in 1999. Team: Dr. N. K. Trikha, Shri Shyam Khosla, Dr. B. L. Gupta, and Dr. K. S. Arya. "
+         "A signed copy was presented to Union Home Minister Shri L. K. Advani. Released at a public function presided over by Justice D. S. Tewatia, former Chief Justice of Calcutta High Court.",
+         1999, "Panchnad Research Institute"),
+        ("Panchnad Research Journal (Annual)",
+         "Annual research journal published by the institute. Confirmed issues include 1988 (Punjab Crisis dialogue papers) and 1989 (Pakistani infiltration in Rajasthan). "
+         "Distribution is institutional.",
+         1988, "Panchnad Research Institute"),
+        ("Terrorism in Punjab — Cause and Cure",
+         "Papers presented at a seminar organised by the institute in Delhi, 1985. Contributors include Justice H. R. Khanna ('Diagnosis and Prescription'), "
+         "Khushwant Singh ('A Lasting Solution'), K. R. Malkani ('Inconvenient Questions'), and five more sections. "
+         "Bilingual (Hindi-English), 130 pages. Held at University of Michigan library.",
+         1987, "Justice Hans Raj Khanna & Panchnad Research Institute"),
+        ("Facts Speak for Themselves",
+         "Field study report on the 1984 anti-Sikh riots — investigative research documenting ground realities. "
+         "Authors: Shyam Khosla, Krishan Lal Maini, Dr. Sunil Khetrapal, and Hemant Vishnoi. Published as an in-house monograph by the institute.",
+         1985, "Shyam Khosla, K. L. Maini, Dr. S. Khetrapal & H. Vishnoi"),
     ]
-    for title, desc, year in pubs:
-        s.add(Publication(title=title, description=desc, year=year, author_or_editor="Panchnad Shodh Sansthan"))
+    for title, desc, year, author in pubs:
+        s.add(Publication(title=title, description=desc, year=year, author_or_editor=author))
 
     lectures_data = [
         (2025, "Prashant Paul", "Truth of Partition of India"),
