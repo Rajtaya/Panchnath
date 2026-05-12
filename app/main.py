@@ -31,7 +31,7 @@ def _seed(s: Session):
     for c in [
         Centre(name="Panchnad Adhyayan Kendra", location="Panjab University, Chandigarh"),
         Centre(name="Panchnad Adhyayan Kendra", location="Chandigarh"),
-        Centre(name="Panchnad Adhyayan Kendra", location="Hisar, Haryana"),
+        Centre(name="पंचनद शोध संस्थान (Panchnad Shodh Sansthan)", location="Hisar, Haryana"),
         Centre(name="Panchnad Adhyayan Kendra", location="Kurukshetra, Haryana"),
         Centre(name="Panchnad Adhyayan Kendra", location="Solan, Himachal Pradesh"),
         Centre(name="Adhyayan Kendra", location="Himachal Pradesh University, Shimla"),
